@@ -7,25 +7,25 @@
         }.property('href')
     });
 
-    I18n.translations.en.js.filters.users = { title: "Users", help: "User leaderboard" };
+    I18n.translations.en.js.filters.groups = { title: "Groups", help: "User leaderboard" };
 
     NavItem.reopenClass({
         buildList : function(category, args) {
           var list = this._super(category, args);
-          list.push(ExternalNavItem.create({href: '/users', name: 'users'}));
+          list.push(ExternalNavItem.create({href: '/groups', name: 'groups'}));
           return list;
         }
     });
 
-   var UsersController = require("discourse/controllers/users").default;
+   var groupsController = require("discourse/controllers/groups").default;
 
-   UsersController.reopen({
-       filterMode: "users",
+   groupsController.reopen({
+       filterMode: "groups",
        categories: function(){
            return Discourse.Site.current().categories;
        }.property(),
        navItems: function(){
-           return NavItem.buildList(null, {filterMode: "users"});
+           return NavItem.buildList(null, {filterMode: "groups"});
        }.property()
    });
 })();
